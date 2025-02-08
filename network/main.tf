@@ -3,15 +3,14 @@ terraform {
 }
 
 locals {
-  bucket-name = var.bucket-name
+  subnets   = var.subnets
+  vpc-cidr  = var.vpc-cidr
+  vpc-name  = var.vpc-name
 }
 
-resource "aws_s3_bucket" "example" {
-  provider = aws.jongin
-  bucket = local.bucket-name
-
-  tags = {
-    Name        = "test"
-    Environment = "home"
-  }
+module "eks-network" {
+  source = "../../terraform-module/module/pji/computing-networks"
+  subnets = local.subnets
+  vpc-cidr = local.vpc-cidr
+  vpc-name = local.vpc-name
 }
