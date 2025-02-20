@@ -3,8 +3,8 @@ locals {
 }
 
 
-module "pji-eks" {
+module "eks" {
   source = "../../terraform-module/module/pji/computings"
-
   vpc_name = local.vpc_name
+  cluster_name = ""
 }
